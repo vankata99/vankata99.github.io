@@ -14,6 +14,7 @@ function startTime() {
   if (h > 24) {
     h = h - 24;
   }
+
   if (h < 0) {
     h = h + 24;
   }
@@ -24,12 +25,13 @@ function startTime() {
   h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
+
+
+
   document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
 
-  document.getElementById('planets').onmousedown = function () {
-    document.getElementById('earth-title').innerHTML = 'Mars time:';
-    m+=40;
-  }
+
+
 
   if (h<=12) {
     document.body.style.backgroundImage = "url('./images/backgroundmorning.jpg')";
@@ -52,6 +54,10 @@ function checkTime(i) {
   return i;
 }
 
+  document.getElementById('planets').onmousedown = function () {
+  document.getElementById('earth-title').innerHTML = 'Mars time:';
+  m+=0.40;
+}
 
 startTime()
 
@@ -98,7 +104,8 @@ document.getElementById('themes').onclick = function changeTheme(){
 };
 
 document.getElementById('planets').onclick = function changePlanet(){
-
+document.getElementById("earth-icon").src = "images/mars.png";
+console.log("testing");
 };
 
 TweenLite.to(clockCome, 2.5, {
@@ -107,9 +114,13 @@ TweenLite.to(clockCome, 2.5, {
 });
 
 
-
+document.getElementById('date').innerHTML = new Date().getMonth();
 
 /*
+months = ['Feb0']
+month[monthNumber]
+
+
   //var object{}
 
     var beasts = ['ant', 'bison', 'camel', 'duck', 'bison'];
