@@ -1,51 +1,15 @@
-/*var d,h,m,s,animate;
+var today = new Date();
+var h;
+var m;
+var s;
 
-function init(){
-  d=new Date();
-  h=d.getHours();
-  m=d.getHours();
-  s=d.getSeconds();
-  clock();
-};
-
-function clock(){
-  s++;
-  if(s==60){
-    s=0;
-    m++;
-    if (m==60) {
-      m=0;
-      h++;
-      if (h==24) {
-        h=0;
-      }
-    }
-  }
-  $('sec', s);
-  $('min', m);
-  $('hr', h);
-  animate=setTimeout(clock,1000);
-};
-
-function $(id,val){
-  if (val<10) {
-    val='0'+val;
-  }
-  document.getElementById(id).innerHTML =val;
-};
-
-window.onload = init;
-*/
 
 function startTime() {
   //offset = 8;
   var today = new Date();
-  var h = today.getHours();
-  var m = today.getMinutes();
-  var s = today.getSeconds();
-
-
-
+   h = today.getHours();
+   m = today.getMinutes();
+   s = today.getSeconds();
 
   if (h > 24) {
     h = h - 24;
@@ -53,10 +17,29 @@ function startTime() {
   if (h < 0) {
     h = h + 24;
   }
+
+
+
+
   h = checkTime(h);
   m = checkTime(m);
   s = checkTime(s);
   document.getElementById('clock').innerHTML = h + ":" + m + ":" + s;
+
+  document.getElementById('planets').onmousedown = function () {
+    document.getElementById('earth-title').innerHTML = 'Mars time:';
+    m+=40;
+  }
+
+  if (h<=12) {
+    document.body.style.backgroundImage = "url('./images/backgroundmorning.jpg')";
+  } else if (h<=17) {
+    document.body.style.backgroundImage = "url('./images/background.jpg')";
+
+  } else if (h<24) {
+    document.body.style.backgroundImage = "url('./images/backgroundnight.jpg')";
+  }
+
   var t = setTimeout(function() {
     startTime()
   }, 1000);
@@ -69,7 +52,61 @@ function checkTime(i) {
   return i;
 }
 
+
 startTime()
+
+
+
+
+// set timeline
+var timeline = new TimelineMax({ repeat: -1, ease: Power0.easeNone });
+
+// amimate timeline
+timeline.to('.marsbar', 1, { opacity: 1})
+		.from('.m1', 200, { backgroundPositionX: 2400}, 'marsbar')
+		.from('.m2', 300, { backgroundPositionX: 1200}, 'marsbar');
+
+//Change the colors for the themes from button
+
+  var textColor = 0;
+
+document.getElementById('themes').onclick = function changeTheme(){
+
+  if (textColor == 0) {
+    document.body.style.color = "yellow";
+    document.getElementById("header").style.color = "yellow";
+    document.getElementById("themes").style.color = "yellow";
+      document.getElementById("planets").style.color = "yellow";
+    textColor+= 1;
+  }
+  else if (textColor == 1) {
+    document.body.style.color = "red";
+    document.getElementById("header").style.color = "red";
+    document.getElementById("themes").style.color = "white";
+    document.getElementById("planets").style.color = "white";
+
+    textColor+= 1;
+  }
+  else{
+    document.body.style.color = "blue";
+    document.getElementById("header").style.color = "blue";
+    document.getElementById("themes").style.color = "blue";
+    document.getElementById("planets").style.color = "blue";
+
+    textColor-=2;
+  }
+};
+
+document.getElementById('planets').onclick = function changePlanet(){
+
+};
+
+TweenLite.to(clockCome, 2.5, {
+  ease: Circ.easeOut,
+  y: -500
+});
+
+
 
 
 /*
@@ -153,7 +190,7 @@ function itemKeypress(event){
     	var checkbox = document.getElementById('checkbox').checked;
     	console.log(checkbox);
     };
-*/
+
 
 //Gravity and Miles Measurement
 
@@ -207,3 +244,4 @@ function itemKeypress(event){
       document.getElementById('water-value').innerHTML = drinks + ' drops left';
     }
 }
+*/
